@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList </title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Schoolbell&v1" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Just do IT: </h1>
+
+        <form action="">
+            <input id="myInput" type="text">
+            <input type="date" id="date" min="25-01-2021" max="25-12-2023"></input>
+            <button id="Add" class="addTask">Add Task</button>
+            <button id="clearBtn" class="removeAll">Remove all</button>
+        </form>
+        <h2>Number of tasks: <span>0</span></h2>
+        <section id="List">
+            <ul class="toDoList">
+            </ul>
+            <img src="just do it.png" alt="" title="Late" width="300" height="200">
+            <!-- <img src="C:\Users\wno\Downloads/just do it.png" alt="Late" position=right width="300" height="200"> -->
+
+            <form action="">
+                <td>Filename To Save As:</td>
+                <td><input id="inputFileNameToSave"></td>
+                <button onClick="saveFileButton(event)" id="saveFile">Save a file</button>
+            </form>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+
+
+</body>
+
+</html>
