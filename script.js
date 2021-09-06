@@ -8,7 +8,9 @@ const toDoList = document.querySelector('.toDoList');
 const clearBtn = document.querySelector('#clearBtn');
 const fileNameField = document.querySelector('#inputFileNameToSave');
 const listItems = document.querySelectorAll('li.task').length;
+const items = document.querySelectorAll('li.task');
 
+document.getElementById('date').value = new Date().toISOString().slice(0, 10);
 
 
 let localStorageToDos = localStorage.getItem('localStorageToDos');
@@ -19,7 +21,6 @@ let tasks = [];
 
 // funcion del
 const removeTask = (event) => {
-    // const listItems = document.querySelectorAll('li.task').length;
     taskNumber.textContent = listItems.length;
 
     for (var i = 0; i < tasks.length; i++) {
@@ -28,9 +29,15 @@ const removeTask = (event) => {
             i--
         }
     }
-    // console.log(tasks)
     localStorage.setItem('localStorageToDos', JSON.stringify(tasks));
     event.target.parentNode.remove();
+
+    var paraArr = [].slice.call(items).sort(function (a, b) {
+        return a.textContent > b.textContent ? 1 : -1;
+    });
+    paraArr.forEach((p) => {
+        toDoList.appendChild(p);
+    });
 
 
 }
@@ -60,12 +67,21 @@ const removeAll = (event) => {
         element.remove();
     })
     localStorage.clear();
+
+
 }
 clearBtn.addEventListener('click', removeAll)
 
+//date new Format
 const addTask = (event) => {
     event.preventDefault()
     const titleTask = input.value;
+
+    if (date.value === "")
+        return alert('Date is empty!');
+
+    let dateFormat = new Date(date.value);
+    dateFormat = new Intl.DateTimeFormat('de-DE').format(dateFormat);
 
     //not empty
     if (titleTask === "")
@@ -74,20 +90,19 @@ const addTask = (event) => {
     // ...
     const task = document.createElement('li');
     task.className = 'task';
+    task.innerHTML = `<div class="text">${titleTask}</div><p>${dateFormat}</p><button>DEL</button>`;
 
     //JASON
-    tasks.push(`${titleTask}<p>${date.value}</p><button>DEL</button>`)
+    tasks.push(task.innerHTML)
     localStorage.setItem('localStorageToDos', JSON.stringify(tasks));
-
-    task.innerHTML = titleTask + ":  " + "<p>" + date.value + "</p><button>DEL</button>";
     ul.appendChild(task);
     input.value = "";
 
-    //number of task
+    //Number of task
+
     const listItems = document.querySelectorAll('li.task').length;
     const items = document.querySelectorAll('li.task');
     taskNumber.textContent = listItems;
-
 
     //after click DEL
     task.querySelector('button').addEventListener('click', removeTask);
@@ -99,6 +114,9 @@ const addTask = (event) => {
     paraArr.forEach((p) => {
         toDoList.appendChild(p);
     });
+
+    // localStorage.setItem("array", JSON.stringify(toDoList)); //store 
+    // var storedArray = JSON.parse(localStorage.getItem("array"));
 }
 
 //date-today
@@ -110,12 +128,15 @@ const saveFileButton = (event, element) => {
     event.preventDefault();
     if (fileNameField.value === "")
         return alert('Text is empty!');
-    const items = document.querySelectorAll('li.task');
 
-    //not empty 
+
+
+    // const items = document.querySelectorAll('li.task');
+
     let text = '';
-    items.forEach(element => {
-        text += element.textContent.substring(0, element.textContent.length - 3) + " \n";
+    items.forEach((element, key) => {
+
+        text += (key + 1) + ". " + document.querySelectorAll('li.task > div')[key].innerHTML + " " + document.querySelectorAll('li.task>p')[key].textContent + "." + " \n";
     });
     var blob = new Blob([text], {
         type: "text/javascript",

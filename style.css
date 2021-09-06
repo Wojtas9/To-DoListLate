@@ -124,8 +124,7 @@ button:hover {
 
 p {
     color: rgb(211, 81, 30);
-    display: flex;
-    /* justify-content: space-between; */
+    /* width: 50%;  */
     align-items: center;
 }
 
@@ -134,7 +133,10 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
 
+.text {
+    width: 30%;
 }
 
 input {
