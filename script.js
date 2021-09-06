@@ -16,11 +16,10 @@ document.getElementById('date').value = new Date().toISOString().slice(0, 10);
 let localStorageToDos = localStorage.getItem('localStorageToDos');
 let tasks = [];
 
-// new Intl.DateTimeFormat('de-DE').format(date);
-
-
 // funcion del
 const removeTask = (event) => {
+
+
     taskNumber.textContent = listItems.length;
 
     for (var i = 0; i < tasks.length; i++) {
@@ -99,7 +98,6 @@ const addTask = (event) => {
     input.value = "";
 
     //Number of task
-
     const listItems = document.querySelectorAll('li.task').length;
     const items = document.querySelectorAll('li.task');
     taskNumber.textContent = listItems;
@@ -131,8 +129,7 @@ const saveFileButton = (event, element) => {
 
 
 
-    // const items = document.querySelectorAll('li.task');
-
+    const items = document.querySelectorAll('li.task');
     let text = '';
     items.forEach((element, key) => {
 
