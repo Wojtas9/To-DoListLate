@@ -109,7 +109,6 @@ const addTask = (event) => {
 //date-today
 date.min = new Date().toISOString().split("T")[0];
 
-
 //funcion save
 const saveFileButton = (event, element) => {
     event.preventDefault();
